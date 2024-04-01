@@ -19,14 +19,14 @@ selected_y_var = st.selectbox(
 
 penguin_file = st.file_uploader("Select Your Local Penguins CSV")
 
-@st.cache.data()
+@st.cache_data()
 def load_file(penguin_file):
     time.sleep(5)
     if penguin_file is not None:
         penguins_df = pd.read_csv(penguin_file)
     else:
         penguins_df = pd.read_csv('penguins.csv')
-        return(penguins_df)
+    return(penguins_df)
     
 penguins_df = load_file(penguin_file)
 
