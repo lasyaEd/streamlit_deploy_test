@@ -1,4 +1,5 @@
 
+import time
 import altair as alt
 import pandas as pd
 import seaborn as sns
@@ -17,10 +18,16 @@ selected_y_var = st.selectbox(
 )
 
 penguin_file = st.file_uploader("Select Your Local Penguins CSV")
-if penguin_file is not None:
-    penguins_df = pd.read_csv(penguin_file)
-else:
-    st.stop()
+
+def load_file(penguin_file):
+    time.sleep(5)
+    if penguin_file is not None:
+        penguins_df = pd.read_csv(penguin_file)
+    else:
+        penguins_df = pd.read_csv('penguin.csv')
+        return(penguins_df)
+    
+penguins_df = load_file(penguin_file)
 
 alt_chart = (
     alt.Chart(penguins_df, title="Scatterplot of Palmer's Penguins")
